@@ -12,6 +12,11 @@ namespace ContractAssignment2
     {
         private static double balance = 40.0;
 
+        public static double getBalance()
+        {
+            return balance;
+        }
+
         public static void SetBalance(double value)
         {
             balance = value;
@@ -20,14 +25,14 @@ namespace ContractAssignment2
         public static void Deposit(double amount)
         {
             Contract.Requires<Exception>(amount>0);
-            SetBalance(balance + amount);
+            SetBalance(getBalance() + amount);
         }
 
         static void Withdraw(double amount)
         {
             Contract.Requires(amount > 0);
-            Contract.Requires<Exception>(balance > amount);
-            SetBalance(balance - amount);
+            Contract.Requires<Exception>(getBalance() > amount);
+            SetBalance(getBalance() - amount);
         }
         static void Main()
         {
@@ -43,7 +48,7 @@ namespace ContractAssignment2
                 Console.WriteLine("Exception caught "+ ex.Message);
             }
             Withdraw(5);
-            Console.WriteLine(balance);
+            Console.WriteLine(getBalance());
         }
     }
 }
